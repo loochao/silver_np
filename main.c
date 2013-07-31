@@ -52,10 +52,10 @@ void pbc(double ** phi, int nx, int ny)
 {
   int i, j;
   for (i=0; i<nx; i++)
-    phi[i][0] = phi[i][ny];
+    phi[i][0] = phi[i][ny-1];
 
   for (j=0; j<ny; j++)
-    phi[0][j] = phi[nx][j]; 
+    phi[0][j] = phi[nx-1][j]; 
 }
 
 int main()
