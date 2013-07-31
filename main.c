@@ -1,36 +1,44 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "solve.h"
 
-void ** alloc_2d(int nx, int ny)
+double ** alloc_2d(int nx, int ny)
 {
     int i;
-    void ** array = malloc(sizeof(double) * nx);
+    double ** array = malloc(sizeof(double) * nx);
     for (i=0; i<nx; i++)
         array[i] = malloc(sizeof(double) * ny);
-
     return array;
 }
 
+void free_2d(double ** array, int nx)
+{
+    int i;
+    for (i=0; i<nx; i++)
+        free(array[i]);
+    free(array);
+}
+
+void output_tecplot(double ** phi, int nx, int ny)
+{
+}
 
 int main()
 {
-
     int nx = 100;
     int ny = 100;
 
     double ** phi = (double **) alloc_2d(nx, ny);
 
-    return 0;
+    free(phi);
 
+    return 0;
 }
 
 void array_init ()
 {
   void * p;
   int n = 400;
-  int i;
   p = (int *) malloc(n * sizeof(int));
 }
