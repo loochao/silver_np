@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <stdlib.h>
-#include <stdio.h>
-
 void ** alloc_2d(int nx, int ny)
 {
     int i;
