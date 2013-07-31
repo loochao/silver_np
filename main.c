@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-
-void ** alloc_2d(int nx, int ny)
 #include "solve.h"
 
 double ** alloc_2d(int nx, int ny)
@@ -35,11 +33,4 @@ int main()
     free(phi);
 
     return 0;
-}
-
-void array_init ()
-{
-  void * p;
-  int n = 400;
-  p = (int *) malloc(n * sizeof(int));
 }
