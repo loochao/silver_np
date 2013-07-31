@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "solve.h"
-#include "types.h"
 
 double ** alloc_2d(int nx, int ny)
 {
@@ -23,7 +22,17 @@ void free_2d(double ** array, int nx)
 /* Output tecplot format */
 void output_tecplot(const char * filename, const char * mode, double ** phi, int nx, int ny, double time)
 {
+    int i,j;
+    FILE * fp = fopen(filename, mode);
 
+    fprintf(fp, "VARIABLES = phi\n");
+    fprintf(fp, "ZONE I = %d, J = %d, strandid=1, solutiontime=%f\n", nx, ny, time);
+
+    for (j=0; j<ny; j++)
+    for (i=0; i<nx; i++)
+        fprintf(fp, "%d %d %f\n", i, j, phi[i][j]);
+
+    fclose(fp);
 }
 
 /* Set initial values of the phi array */
@@ -57,9 +66,10 @@ int main()
     
     int istep;
     double ** phi = (double **) alloc_2d(nx, ny);
-    
     Parameter params;
-      
+
+    output_tecplot("output.tec", "w", phi, nx, ny, 0);
+
     for (istep=0; istep<nsteps; istep++)
     {
       solve_step(phi, nx, ny, params);
