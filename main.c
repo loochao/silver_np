@@ -11,7 +11,6 @@ void ** alloc_2d(int nx, int ny)
     return array;
 }
 
-
 int main()
 {
 
