@@ -30,7 +30,7 @@ int main()
 void array_init ()
 {
   void * p;
-  int n = 200;
+  int n = 400;
   int i;
   p = (int *) malloc(n * sizeof(int));
 }
