@@ -50,12 +50,28 @@ void initial_conditions(double ** phi, int nx, int ny)
 /* Apply Periodic Boundary Conditions */
 void pbc(double ** phi, int nx, int ny)
 {
+  double *pad_lx;
+  double *pad_rx;
+  double *pad_uy;
+  double *pad_dy;
+
+  pad_lx = (double*)malloc(sizeof(double) * ny);
+  pad_rx = (double*)malloc(sizeof(double) * ny);
+  pad_uy = (double*)malloc(sizeof(double) * nx);
+  pad_dy = (double*)malloc(sizeof(double) * nx);
+
   int i, j;
   for (i=0; i<nx; i++)
-    phi[i][0] = phi[i][ny-1];
+    {
+      phi[i][0] = pad_dy[i];
+      phi[i][ny-1] = pad_uy[i];
+    }
 
   for (j=0; j<ny; j++)
-    phi[0][j] = phi[nx-1][j]; 
+    {
+      phi[0][j] = pad_rx[j];
+      phi[nx-1][j] = pad_lx[j];
+    }
 }
 
 int main()
