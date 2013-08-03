@@ -42,7 +42,7 @@ void initial_conditions(double ** phi, int nx, int ny)
   for (i=0; i<nx; i++)
     {
       for(j=0; j<ny; j++)
-        phi[i][j] = 0;
+        phi[i][j] = -1;
     }
   phi[nx/2][ny/2] = 1;
 }
@@ -66,13 +66,15 @@ void pbc(double ** phi, int nx, int ny)
 
 int main()
 {
-    int nsteps = 100;
+    int nsteps = 0;
     int nx = 100;
     int ny = 100;
     
     int istep;
     double ** phi = (double **) alloc_2d(nx, ny);
     Parameter params;
+    params.dt = 0.1;
+    params.dx = 1;
 
     output_tecplot("output.tec", "w", phi, nx, ny, 0);
 

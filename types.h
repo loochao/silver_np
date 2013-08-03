@@ -2,7 +2,8 @@
 #define TYPES_H
 
 typedef struct {
-  int a;
+  double dt;
+  double dx;
 } Parameter;
 
 #endif
