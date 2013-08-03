@@ -25,7 +25,7 @@ void output_tecplot(const char * filename, const char * mode, double ** phi, int
     int i,j;
     FILE * fp = fopen(filename, mode);
 
-    fprintf(fp, "VARIABLES = phi\n");
+    fprintf(fp, "VARIABLES = X Y phi\n");
     fprintf(fp, "ZONE I = %d, J = %d, strandid=1, solutiontime=%f\n", nx, ny, time);
 
     for (j=0; j<ny; j++)
@@ -40,11 +40,20 @@ void initial_conditions(double ** phi, int nx, int ny)
 {
   int i, j;
   for (i=0; i<nx; i++)
-    {
-      for(j=0; j<ny; j++)
+  for(j=0; j<ny; j++)
         phi[i][j] = -1;
+
+for (i=0; i<nx; i++)
+for (j=0; j<ny; j++)
+{
+    double rx = i - nx/2;
+    double ry = j - ny/2;
+    double r = sqrt(rx*rx + ry*ry);
+
+    if (r<10) {
+        phi[i][j] = 1;
     }
-  phi[nx/2][ny/2] = 1;
+}
 }
 
 /* Apply Periodic Boundary Conditions */
@@ -66,7 +75,7 @@ void pbc(double ** phi, int nx, int ny)
 
 int main()
 {
-    int nsteps = 100;
+    int nsteps = 0;
     int nx = 100;
     int ny = 100;
     
