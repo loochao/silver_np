@@ -75,7 +75,7 @@ void pbc(double ** phi, int nx, int ny)
 
 int main()
 {
-    int nsteps = 100;
+    int nsteps = 10000;
     int nx = 100;
     int ny = 100;
     
@@ -86,13 +86,16 @@ int main()
     params.dx = 1;
 
     initial_conditions(phi, nx, ny);
+    pbc(phi, nx, ny);
     output_tecplot("output.tec", "w", phi, nx, ny, 0);
 
     for (istep=0; istep<nsteps; istep++)
     {
         solve_step(phi, nx, ny, params);
         pbc(phi, nx, ny);
-        output_tecplot("output.tec", "a", phi, nx, ny, 0);
+
+        if ((istep+1)%100==0)
+            output_tecplot("output.tec", "a", phi, nx, ny, istep);
     }
 
     free(phi);

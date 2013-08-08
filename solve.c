@@ -21,7 +21,7 @@ void solve_step(double ** phi, int nx, int ny, Parameter params)
       phi3 = phi[i][j] * phi[i][j] * phi[i][j];
 
       term1 = 0.1 * (1 - phi2) * (1 - phi2);
-      phi[i][j] = phi[i][j] + dt * (phi3 - phi1 - term1 - term_xy[i][j]);
+      phi[i][j] = phi[i][j] - dt * (phi3 - phi1 - term1 - term_xy[i][j]);
     }
   }
 }
